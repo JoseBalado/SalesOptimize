@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MapperService
 {
@@ -14,4 +15,54 @@ namespace MapperService
         }
     }
 
+    public class OneToManyMapper : IOneToManyMapper
+    {
+        /// <summary>
+        /// Defines a new mapping between parent and child
+        /// </summary>
+        /// <param name="parent">Parent identifier</param>
+        /// <param name="child">Child identifier</param>
+        public void Add (int parent, int child)
+        {
+            throw new NotImplementedException("Not fully implemented.");
+        }
+        /// <summary>
+        /// Removes all mappings for a valid parent
+        /// </summary>
+        /// <param name="parent">Parent identifier</param>
+        public void RemoveParent (int parent)
+        {
+            throw new NotImplementedException("Not fully implemented.");
+        }
+        /// <summary>
+        /// Removes a mapping for a valid child
+        /// </summary>
+        /// <param name="child">Child identifier</param>
+        public void RemoveChild (int child)
+        {
+            throw new NotImplementedException("Not fully implemented.");
+        }
+        /// <summary>
+        /// Returns all (immediate) children for a given parent.
+        /// If there are no mappings for the parent, empty set is returned
+
+        /// </summary>
+        /// <param name="parent">Parent identifier</param>
+        /// <returns>Children identifiers</returns>
+        public IEnumerable<int> GetChildren (int parent)
+        {
+            throw new NotImplementedException("Not fully implemented.");
+        }
+        /// <summary>
+        /// Returns a parent for a given child.
+        /// If there is no mapping for a child, returns 0
+        /// </summary>
+        /// <param name="child">Child identifier</param>
+        /// <returns>Parent identifier</returns>
+        public int GetParent (int child)
+        {
+            throw new NotImplementedException("Not fully implemented.");
+        }
+    }
 }
+
