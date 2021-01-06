@@ -41,14 +41,17 @@ namespace MapperService
 
     public class OneToManyMapper : IOneToManyMapper
     {
+        public List<Parent> parentList = new List<Parent>();
+        public List<Child> childList = new List<Child>();
+
         /// <summary>
         /// Defines a new mapping between parent and child
         /// </summary>
         /// <param name="parent">Parent identifier</param>
         /// <param name="child">Child identifier</param>
-        public void Add(int parent, int child)
+        public void Add(int parentId, int childId)
         {
-            throw new NotImplementedException("Not fully implemented.");
+            Console.WriteLine($"{parentId}-{childId}");
         }
         /// <summary>
         /// Removes all mappings for a valid parent
