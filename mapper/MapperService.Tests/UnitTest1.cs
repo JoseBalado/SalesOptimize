@@ -49,9 +49,13 @@ namespace MapperService.Tests
 
             var oneToManyMapper = new OneToManyMapper();
             oneToManyMapper.parentList.Add(parent);
+            oneToManyMapper.childList.Add(child);
+            oneToManyMapper.Add(parentId, childId);
+
             oneToManyMapper.RemoveParent(parentId);
 
             Assert.True(oneToManyMapper.parentList.Count == 0, $"Parent was not removed from parentList");
+            Assert.True(oneToManyMapper.childList.Count == 0, $"Child was not removed from childList");
         }
 
         [Theory]

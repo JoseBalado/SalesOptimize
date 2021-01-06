@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MapperService
 {
@@ -48,7 +49,6 @@ namespace MapperService
         /// <param name="child">Child identifier</param>
         public void Add(int parentId, int childId)
         {
-            Console.WriteLine($"{parentId}-{childId}");
             parentList.ForEach(parent => {
                     if(parent.Id == parentId)
                     {
@@ -64,7 +64,15 @@ namespace MapperService
         public void RemoveParent(int parentId)
         {
             Console.WriteLine($"Parent id: {parentId}");
+            var parent = parentList.Find(parent => parent.Id == parentId);
+            Console.WriteLine($"Parent : {parent.Id}");
+            var removeList = parent.children;
+            childList.RemoveAll(child => removeList.Any(id => id == child.Id));
+            Console.WriteLine($"Count Children : {childList.Count}");
+
+            Console.WriteLine($"Count Parent : {parentList.Count}");
             parentList.RemoveAll(parent => parent.Id == parentId);
+            Console.WriteLine($"Count Parent : {parentList.Count}");
         }
         /// <summary>
         /// Removes a mapping for a valid child
