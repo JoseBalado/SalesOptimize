@@ -25,6 +25,19 @@ namespace MapperService.Tests
 
             Assert.False(result, $"{value} should not be prime");
         }
+
+        [Theory]
+        [InlineData(0,1)]
+        public void OneToManyMapper_Add(int idParent, int idChild)
+        {
+            var parent = new Parent(idParent);
+            var child = new Child(idChild);
+
+            var oneToManyMapper = new OneToManyMapper();
+            //void result = oneToManyMapper.Add(parent, child);
+
+            Assert.False(false, $"{parent} should not be prime");
+        }
     }
 }
 

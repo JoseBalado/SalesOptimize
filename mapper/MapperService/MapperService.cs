@@ -15,6 +15,30 @@ namespace MapperService
         }
     }
 
+    public class Parent
+    {
+        List<int> children;
+
+        public int Id { get; }
+
+        public Parent(int id)
+        {
+            Id = id;
+        }
+
+    }
+
+    public class Child
+    {
+        public int Id { get; }
+
+        public Child(int id)
+        {
+            Id = id;
+        }
+
+    }
+
     public class OneToManyMapper : IOneToManyMapper
     {
         /// <summary>
@@ -22,7 +46,7 @@ namespace MapperService
         /// </summary>
         /// <param name="parent">Parent identifier</param>
         /// <param name="child">Child identifier</param>
-        public void Add (int parent, int child)
+        public void Add(int parent, int child)
         {
             throw new NotImplementedException("Not fully implemented.");
         }
@@ -30,7 +54,7 @@ namespace MapperService
         /// Removes all mappings for a valid parent
         /// </summary>
         /// <param name="parent">Parent identifier</param>
-        public void RemoveParent (int parent)
+        public void RemoveParent(int parent)
         {
             throw new NotImplementedException("Not fully implemented.");
         }
@@ -38,7 +62,7 @@ namespace MapperService
         /// Removes a mapping for a valid child
         /// </summary>
         /// <param name="child">Child identifier</param>
-        public void RemoveChild (int child)
+        public void RemoveChild(int child)
         {
             throw new NotImplementedException("Not fully implemented.");
         }
@@ -49,7 +73,7 @@ namespace MapperService
         /// </summary>
         /// <param name="parent">Parent identifier</param>
         /// <returns>Children identifiers</returns>
-        public IEnumerable<int> GetChildren (int parent)
+        public IEnumerable<int>GetChildren (int parent)
         {
             throw new NotImplementedException("Not fully implemented.");
         }
@@ -59,7 +83,7 @@ namespace MapperService
         /// </summary>
         /// <param name="child">Child identifier</param>
         /// <returns>Parent identifier</returns>
-        public int GetParent (int child)
+        public int GetParent(int child)
         {
             throw new NotImplementedException("Not fully implemented.");
         }
