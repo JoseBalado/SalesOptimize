@@ -39,6 +39,20 @@ namespace MapperService.Tests
 
             Assert.True(parent.children.Contains(childId), $"Children is not added to this parent");
         }
+
+        [Theory]
+        [InlineData(0,1)]
+        public void OneToManyMapper_RemoveParent(int parentId, int childId)
+        {
+            var parent = new Parent(parentId);
+            var child = new Child(childId);
+
+            var oneToManyMapper = new OneToManyMapper();
+            oneToManyMapper.parentList.Add(parent);
+            oneToManyMapper.RemoveParent(parentId);
+
+            Assert.True(oneToManyMapper.parentList.Count == 0, $"Children is not added to this parent");
+        }
     }
 }
 
