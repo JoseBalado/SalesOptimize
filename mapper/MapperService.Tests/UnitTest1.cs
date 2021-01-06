@@ -37,7 +37,7 @@ namespace MapperService.Tests
             oneToManyMapper.parentList.Add(parent);
             oneToManyMapper.Add(parentId, childId);
 
-            Assert.False(false, $"{parent} should not be prime");
+            Assert.True(parent.children.Contains(childId), $"Children is not added to this parent");
         }
     }
 }

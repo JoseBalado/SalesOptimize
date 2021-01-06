@@ -17,10 +17,8 @@ namespace MapperService
 
     public class Parent
     {
-        List<int> children;
-
+        public HashSet<int> children = new HashSet<int>();
         public int Id { get; }
-
         public Parent(int id)
         {
             Id = id;
@@ -31,7 +29,6 @@ namespace MapperService
     public class Child
     {
         public int Id { get; }
-
         public Child(int id)
         {
             Id = id;
@@ -52,6 +49,13 @@ namespace MapperService
         public void Add(int parentId, int childId)
         {
             Console.WriteLine($"{parentId}-{childId}");
+            parentList.ForEach(parent => {
+                    if(parent.Id == parentId)
+                    {
+                        parent.children.Add(childId);
+                        Console.WriteLine($"Child Id: {childId} added to Parent Id: {parent.Id}");
+                    }
+            });
         }
         /// <summary>
         /// Removes all mappings for a valid parent
