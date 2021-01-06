@@ -70,9 +70,10 @@ namespace MapperService
         /// Removes a mapping for a valid child
         /// </summary>
         /// <param name="child">Child identifier</param>
-        public void RemoveChild(int child)
+        public void RemoveChild(int childId)
         {
-            throw new NotImplementedException("Not fully implemented.");
+            Console.WriteLine($"Child id: {childId}");
+            childList.RemoveAll(child => child.Id == childId);
         }
         /// <summary>
         /// Returns all (immediate) children for a given parent.
