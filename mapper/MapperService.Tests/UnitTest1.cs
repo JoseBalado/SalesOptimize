@@ -1,5 +1,7 @@
 using System;
 using Xunit;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace MapperService.Tests
 {
@@ -73,6 +75,23 @@ namespace MapperService.Tests
 
             Assert.True(oneToManyMapper.childList.Count == 0, $"Child was not removed from childList");
             Assert.True(parent.children.Count == 0, $"Child was not removed from childList");
+        }
+
+        [Theory]
+        [InlineData(0, 1)]
+        public void OneToManyMapper_GetChildren(int parentId, int childId)
+        {
+            var parent = new Parent(parentId);
+            var child = new Child(childId);
+            var oneToManyMapper = new OneToManyMapper();
+
+            oneToManyMapper.parentList.Add(parent);
+            oneToManyMapper.childList.Add(child);
+            oneToManyMapper.Add(parentId, childId);
+
+            var childList = oneToManyMapper.GetChildren(parentId);
+
+            Assert.True(childList.Count() == 1, $"Child was not added to childList");
         }
     }
 }

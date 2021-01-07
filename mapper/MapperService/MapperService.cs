@@ -97,9 +97,17 @@ namespace MapperService
         /// </summary>
         /// <param name="parent">Parent identifier</param>
         /// <returns>Children identifiers</returns>
-        public IEnumerable<int>GetChildren (int parent)
+        public IEnumerable<int>GetChildren (int parentId)
         {
-            throw new NotImplementedException("Not fully implemented.");
+            for (int index = 0; index < parentList.Count; index++)
+            {
+                if(parentList[index].Id == parentId)
+                {
+                    return parentList[index].children;
+                }
+            }
+
+            return null;
         }
         /// <summary>
         /// Returns a parent for a given child.
