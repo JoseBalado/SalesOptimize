@@ -110,15 +110,14 @@ namespace MapperService.Tests
             Assert.Equal(parentForChild, parentId);
         }
 
-        [Theory]
-        [InlineData(1)]
-        public void OneToManyMapper_GetParent0(int childId)
+        [Fact]
+        public void OneToManyMapper_GetParent0()
         {
-            var child = new Child(childId);
+            var child = new Child(1);
             var oneToManyMapper = new OneToManyMapper();
             oneToManyMapper.childList.Add(child);
 
-            int parentForChild = oneToManyMapper.GetParent(childId);
+            int parentForChild = oneToManyMapper.GetParent(1);
 
             Assert.Equal(parentForChild, 0);
         }
