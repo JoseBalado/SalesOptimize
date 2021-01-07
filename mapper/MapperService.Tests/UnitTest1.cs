@@ -1,7 +1,6 @@
 using System;
 using Xunit;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace MapperService.Tests
 {
@@ -91,7 +90,24 @@ namespace MapperService.Tests
 
             var childList = oneToManyMapper.GetChildren(parentId);
 
-            Assert.True(childList.Count() == 1, $"Child was not added to childList");
+            Assert.True(childList.Count() == 1, $"Value returned is not of type List");
+        }
+
+        [Theory]
+        [InlineData(2, 1)]
+        public void OneToManyMapper_GetParent(int parentId, int childId)
+        {
+            var parent = new Parent(parentId);
+            var child = new Child(childId);
+            var oneToManyMapper = new OneToManyMapper();
+
+            oneToManyMapper.parentList.Add(parent);
+            oneToManyMapper.childList.Add(child);
+            oneToManyMapper.Add(parentId, childId);
+
+            int parentForChild = oneToManyMapper.GetParent(childId);
+
+            Assert.Equal(parentForChild, parentId);
         }
     }
 }

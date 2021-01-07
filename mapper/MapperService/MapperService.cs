@@ -115,9 +115,17 @@ namespace MapperService
         /// </summary>
         /// <param name="child">Child identifier</param>
         /// <returns>Parent identifier</returns>
-        public int GetParent(int child)
+        public int GetParent(int childId)
         {
-            throw new NotImplementedException("Not fully implemented.");
+            for (int index = 0; index < parentList.Count; index++)
+            {
+                bool result = parentList[index].children.Any(id => id == childId);
+                if(result)
+                {
+                    return parentList[index].Id;
+                }
+            }
+            return 0;
         }
     }
 }
