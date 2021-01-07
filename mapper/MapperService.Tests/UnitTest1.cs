@@ -31,7 +31,6 @@ namespace MapperService.Tests
         public void OneToManyMapper_Add(int parentId, int childId)
         {
             var parent = new Parent(parentId);
-            var child = new Child(childId);
 
             var oneToManyMapper = new OneToManyMapper();
             oneToManyMapper.parentList.Add(parent);
@@ -55,21 +54,25 @@ namespace MapperService.Tests
             oneToManyMapper.RemoveParent(parentId);
 
             Assert.True(oneToManyMapper.parentList.Count == 0, $"Parent was not removed from parentList");
-            Assert.True(oneToManyMapper.childList.Count == 0, $"Child was not removed from childList");
+            Assert.True(oneToManyMapper.childList.Count == 0, $"Orphan child was not removed from childList");
         }
 
         [Theory]
-        [InlineData(0)]
-        public void OneToManyMapper_RemoveChild(int childId)
+        [InlineData(0, 1)]
+        public void OneToManyMapper_RemoveChild(int parentId, int childId)
         {
-            // var parent = new Parent(parentId);
+            var parent = new Parent(parentId);
             var child = new Child(childId);
-
             var oneToManyMapper = new OneToManyMapper();
+
+            oneToManyMapper.parentList.Add(parent);
             oneToManyMapper.childList.Add(child);
+            oneToManyMapper.Add(parentId, childId);
+
             oneToManyMapper.RemoveChild(childId);
 
             Assert.True(oneToManyMapper.childList.Count == 0, $"Child was not removed from childList");
+            Assert.True(parent.children.Count == 0, $"Child was not removed from childList");
         }
     }
 }

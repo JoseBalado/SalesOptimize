@@ -82,6 +82,13 @@ namespace MapperService
         {
             Console.WriteLine($"Child id: {childId}");
             childList.RemoveAll(child => child.Id == childId);
+
+            parentList.ForEach(parent => {
+                parent.children.Remove(childId);
+                Console.WriteLine($"Child Id: {childId} removed from Parent Id: {parent.Id}");
+            });
+
+
         }
         /// <summary>
         /// Returns all (immediate) children for a given parent.
