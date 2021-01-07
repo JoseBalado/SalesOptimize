@@ -93,6 +93,15 @@ namespace MapperService.Tests
             Assert.True(childList.Count() == 1, $"Value returned is not of type List");
         }
 
+        [Fact]
+        public void OneToManyMapper_GetChildrenEmpty()
+        {
+            var oneToManyMapper = new OneToManyMapper();
+            var childList = oneToManyMapper.GetChildren(0);
+
+            Assert.Empty(childList);
+        }
+
         [Theory]
         [InlineData(2, 1)]
         public void OneToManyMapper_GetParent(int parentId, int childId)
@@ -119,7 +128,7 @@ namespace MapperService.Tests
 
             int parentForChild = oneToManyMapper.GetParent(1);
 
-            Assert.Equal(parentForChild, 0);
+            Assert.Equal(0, parentForChild);
         }
     }
 }

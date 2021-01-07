@@ -107,7 +107,7 @@ namespace MapperService
                 }
             }
 
-            return null;
+            return new HashSet<int>();
         }
         /// <summary>
         /// Returns a parent for a given child.
