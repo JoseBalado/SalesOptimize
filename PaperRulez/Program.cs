@@ -32,6 +32,8 @@ namespace PaperRulez
                     {
                         Console.WriteLine($"<{parameter}>");
                     }
+
+                    lookupInFile(file, parameters[0]);
                 }
             }
 
@@ -41,6 +43,14 @@ namespace PaperRulez
                 Console.WriteLine(e.Message);
             }
         }
+
+        static public void lookupInFile(string file, string parameter)
+        {
+          foreach (Match match in Regex.Matches(file, parameter, RegexOptions.IgnoreCase))
+          {
+             Console.WriteLine("Found '{0}' at position {1}", match.Value, match.Index);
+          }
+       }
     }
 
     class LookupStore : ILookupStore
