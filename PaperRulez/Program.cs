@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace PaperRulez
 {
@@ -14,7 +15,23 @@ namespace PaperRulez
                 using (var sr = new StreamReader("./client/1234_test.txt"))
                 {
                     // Read the stream as a string, and write the string to the console.
-                    Console.WriteLine(sr.ReadToEnd());
+                    string file = sr.ReadToEnd();
+
+                    Match matchParameters = Regex.Match(file, @"\|(.*)\n");
+                    Match typeOfProcessing = Regex.Match(file, @"^(.+)\|");
+                    Console.WriteLine("-----------------------------");
+                    Console.WriteLine("File: \n" + file);
+
+                    Console.WriteLine("-----------------------------");
+                    Console.WriteLine("Type of processing: " + typeOfProcessing.Groups[1].Value);
+                    Console.WriteLine("Match parameters: " + matchParameters.Groups[1].Value);
+                    Console.WriteLine("-----------------------------");
+                    string[] parameters = matchParameters.Groups[1].Value.Split(",");
+
+                    foreach (var parameter in parameters)
+                    {
+                        Console.WriteLine($"<{parameter}>");
+                    }
                 }
             }
 
