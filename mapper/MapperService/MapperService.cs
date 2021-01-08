@@ -4,18 +4,6 @@ using System.Linq;
 
 namespace MapperService
 {
-    public class PrimeService
-    {
-        public bool IsPrime(int candidate)
-        {
-            if (candidate < 2)
-            {
-                return false;
-            }
-            throw new NotImplementedException("Not fully implemented.");
-        }
-    }
-
     public class Parent
     {
         public HashSet<int> children = new HashSet<int>();
@@ -24,7 +12,6 @@ namespace MapperService
         {
             Id = id;
         }
-
     }
 
     public class Child
@@ -34,7 +21,6 @@ namespace MapperService
         {
             Id = id;
         }
-
     }
 
     public class OneToManyMapper : IOneToManyMapper
@@ -53,27 +39,23 @@ namespace MapperService
                     if(parent.Id == parentId)
                     {
                         parent.children.Add(childId);
-                        Console.WriteLine($"Child Id: {childId} added to Parent Id: {parent.Id}");
                     }
             });
         }
+
         /// <summary>
         /// Removes all mappings for a valid parent
         /// </summary>
         /// <param name="parent">Parent identifier</param>
         public void RemoveParent(int parentId)
         {
-            Console.WriteLine($"Parent id: {parentId}");
             var parent = parentList.Find(parent => parent.Id == parentId);
-            Console.WriteLine($"Parent : {parent.Id}");
             var removeList = parent.children;
-            childList.RemoveAll(child => removeList.Any(id => id == child.Id));
-            Console.WriteLine($"Count Children : {childList.Count}");
 
-            Console.WriteLine($"Count Parent : {parentList.Count}");
+            childList.RemoveAll(child => removeList.Any(id => id == child.Id));
             parentList.RemoveAll(parent => parent.Id == parentId);
-            Console.WriteLine($"Count Parent : {parentList.Count}");
         }
+
         /// <summary>
         /// Removes a mapping for a valid child
         /// </summary>
@@ -85,15 +67,12 @@ namespace MapperService
 
             parentList.ForEach(parent => {
                 parent.children.Remove(childId);
-                Console.WriteLine($"Child Id: {childId} removed from Parent Id: {parent.Id}");
             });
-
-
         }
+
         /// <summary>
         /// Returns all (immediate) children for a given parent.
         /// If there are no mappings for the parent, empty set is returned
-
         /// </summary>
         /// <param name="parent">Parent identifier</param>
         /// <returns>Children identifiers</returns>
@@ -109,6 +88,7 @@ namespace MapperService
 
             return new HashSet<int>();
         }
+
         /// <summary>
         /// Returns a parent for a given child.
         /// If there is no mapping for a child, returns 0
