@@ -11,55 +11,27 @@ namespace PaperRulez
         {
             try
             {
-                // Open the text file using a stream reader.
-                using (var sr = new StreamReader("./client/1234_test.txt"))
-                {
-                    // Read the stream as a string, and write the string to the console.
-                    string file = sr.ReadToEnd();
+                const string client = "client";
+                const string documentId = "1234";
+                const string contentType = "test";
 
-                    Match matchParameters = Regex.Match(file, @"\|(.*)\n");
-                    Match typeOfProcessing = Regex.Match(file, @"^(.+)\|");
-                    Console.WriteLine("-----------------------------");
-                    Console.WriteLine("File: \n" + file);
+                string file = Utilities.LoadFile(client, documentId, contentType);
+                Console.WriteLine("File: \n" + file);
+                Console.WriteLine("-----------------------------");
 
-                    Console.WriteLine("-----------------------------");
-                    Console.WriteLine("Type of processing: " + typeOfProcessing.Groups[1].Value);
-                    Console.WriteLine("Match parameters: " + matchParameters.Groups[1].Value);
-                    Console.WriteLine("-----------------------------");
-                    string[] parameters = matchParameters.Groups[1].Value.Split(",");
+                string typeOfProcessing = Utilities.TypeOfProcessing(file);
+                IEnumerable<string> parameters = Utilities.FindParameters(file);
+                IEnumerable<string> keywords = parameters;
 
-                    foreach (var parameter in parameters)
-                    {
-                        Console.WriteLine($"<{parameter}>");
-                    }
-
-                    lookupInFile(file, parameters[0]);
-                }
+                var lookupStore = new LookupStore();
+                lookupStore.Record(client, documentId, keywords);
             }
 
-            catch (IOException e)
+            catch (Exception e)
             {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
+                Console.WriteLine("{0} Exception caught.", e);
             }
         }
-
-        static public void lookupInFile(string file, string parameter)
-        {
-          foreach (Match match in Regex.Matches(file, parameter, RegexOptions.IgnoreCase))
-          {
-             Console.WriteLine("Found '{0}' at position {1}", match.Value, match.Index);
-          }
-       }
-    }
-
-    class LookupStore : ILookupStore
-    {
-        public void Record (string client, string documentId, IEnumerable<string> keywords)
-        {
-            Console.WriteLine("Hello Record!");
-        }
-
     }
 }
 
