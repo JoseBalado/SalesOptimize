@@ -23,10 +23,9 @@ namespace PaperRulez
                 lookupStore.Record("client", "1234", keywords);
             }
 
-            catch (IOException e)
+            catch (Exception e)
             {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
+                Console.WriteLine("{0} Exception caught.", e);
             }
         }
     }
