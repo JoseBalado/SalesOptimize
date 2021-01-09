@@ -11,7 +11,11 @@ namespace PaperRulez
         {
             try
             {
-                string file = Utilities.LoadFile("client", "documentId");
+                const string client = "client";
+                const string documentId = "1234";
+                const string contentType = "test";
+
+                string file = Utilities.LoadFile(client, documentId, contentType);
                 Console.WriteLine("File: \n" + file);
                 Console.WriteLine("-----------------------------");
 
