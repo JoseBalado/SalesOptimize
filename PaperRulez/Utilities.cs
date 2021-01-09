@@ -40,9 +40,17 @@ namespace PaperRulez
         {
             foreach(string parameter in parameters)
             {
+              bool isFirst = true;
               foreach (Match match in Regex.Matches(file, parameter, RegexOptions.IgnoreCase))
               {
-                 Console.WriteLine("Found '{0}' at position {1}", match.Value, match.Index);
+                  if(isFirst)
+                  {
+                      isFirst = false;
+                  }
+                  else
+                  {
+                     Console.WriteLine("Found '{0}' at position {1}", match.Value, match.Index);
+                  }
               }
             }
             Console.WriteLine("--------------------------------------------");
