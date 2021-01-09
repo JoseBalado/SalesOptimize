@@ -24,6 +24,8 @@ namespace PaperRulez
                 IEnumerable<string> keywords = parameters;
 
                 var lookupStore = new LookupStore();
+
+                Utilities.LookupInFile(file, keywords);
                 lookupStore.Record(client, documentId, keywords);
             }
 

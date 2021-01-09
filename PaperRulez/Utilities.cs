@@ -36,13 +36,17 @@ namespace PaperRulez
             }
         }
 
-        static public void LookupInFile(string file, string parameter)
+        static public void LookupInFile(string file, IEnumerable<string> parameters)
         {
-          foreach (Match match in Regex.Matches(file, parameter, RegexOptions.IgnoreCase))
-          {
-             Console.WriteLine("Found '{0}' at position {1}", match.Value, match.Index);
-          }
-       }
+            foreach(string parameter in parameters)
+            {
+              foreach (Match match in Regex.Matches(file, parameter, RegexOptions.IgnoreCase))
+              {
+                 Console.WriteLine("Found '{0}' at position {1}", match.Value, match.Index);
+              }
+            }
+            Console.WriteLine("--------------------------------------------");
+        }
 
         static public string TypeOfProcessing(string file)
         {
