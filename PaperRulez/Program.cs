@@ -9,6 +9,7 @@ namespace PaperRulez
     {
         static void Main(string[] args)
         {
+            IEnumerable<string> keywords = new List<string>();
             try
             {
                 // Open the text file using a stream reader.
@@ -34,7 +35,11 @@ namespace PaperRulez
                     }
 
                     lookupInFile(file, parameters[0]);
+                    keywords = parameters;
                 }
+
+                var lookupStore = new LookupStore();
+                lookupStore.Record("client", "1234", keywords);
             }
 
             catch (IOException e)
@@ -51,15 +56,6 @@ namespace PaperRulez
              Console.WriteLine("Found '{0}' at position {1}", match.Value, match.Index);
           }
        }
-    }
-
-    class LookupStore : ILookupStore
-    {
-        public void Record (string client, string documentId, IEnumerable<string> keywords)
-        {
-            Console.WriteLine("Hello Record!");
-        }
-
     }
 }
 
