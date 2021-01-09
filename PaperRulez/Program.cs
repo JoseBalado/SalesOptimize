@@ -29,11 +29,6 @@ namespace PaperRulez
                     Console.WriteLine("-----------------------------");
                     string[] parameters = matchParameters.Groups[1].Value.Split(",");
 
-                    foreach (var parameter in parameters)
-                    {
-                        Console.WriteLine($"<{parameter}>");
-                    }
-
                     Utilities.LookupInFile(file, parameters[0]);
                     keywords = parameters;
                 }
