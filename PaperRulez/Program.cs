@@ -23,10 +23,18 @@ namespace PaperRulez
                 IEnumerable<string> parameters = Utilities.FindParameters(file);
                 IEnumerable<string> keywords = parameters;
 
-                var lookupStore = new LookupStore();
+                switch (typeOfProcessing)
+                {
+                    case "lookup":
+                        var lookupStore = new LookupStore();
+                        Utilities.LookupInFile(file, keywords);
+                        lookupStore.Record(client, documentId, keywords);
+                        break;
+                    default:
+                        Console.WriteLine("Type of processing not implemented");
+                        break;
+                }
 
-                Utilities.LookupInFile(file, keywords);
-                lookupStore.Record(client, documentId, keywords);
             }
 
             catch (Exception e)
