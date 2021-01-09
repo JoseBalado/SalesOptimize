@@ -14,12 +14,14 @@ namespace PaperRulez
                 string file = Utilities.LoadFile("client", "documentId");
 
                 Match matchParameters = Regex.Match(file, @"\|(.*)\n");
-                Match typeOfProcessing = Regex.Match(file, @"^(.+)\|");
+                // Match typeOfProcessing = Regex.Match(file, @"^(.+)\|");
+                string typeOfProcessing = Utilities.TypeOfProcessing(file);
+
                 Console.WriteLine("-----------------------------");
                 Console.WriteLine("File: \n" + file);
 
                 Console.WriteLine("-----------------------------");
-                Console.WriteLine("Type of processing: " + typeOfProcessing.Groups[1].Value);
+                // Console.WriteLine("Type of processing: " + typeOfProcessing.Groups[1].Value);
                 Console.WriteLine("Match parameters: " + matchParameters.Groups[1].Value);
                 Console.WriteLine("-----------------------------");
                 string[] parameters = matchParameters.Groups[1].Value.Split(",");

@@ -34,6 +34,13 @@ namespace PaperRulez
              Console.WriteLine("Found '{0}' at position {1}", match.Value, match.Index);
           }
        }
+
+        static public string TypeOfProcessing(string file)
+        {
+            Match typeOfProcessing = Regex.Match(file, @"^(.+)\|");
+            Console.WriteLine("Type of processing: " + typeOfProcessing.Groups[1].Value);
+            return typeOfProcessing.Groups[1].Value;
+       }
     }
 }
 
