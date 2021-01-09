@@ -16,7 +16,8 @@ namespace PaperRulez
                 using (var sr = new StreamReader("./client/1234_test.txt"))
                 {
                     // Read the stream as a string, and write the string to the console.
-                    string file = sr.ReadToEnd();
+                    // string file = sr.ReadToEnd();
+                    string file = Utilities.LoadFile("client", "documentId");
 
                     Match matchParameters = Regex.Match(file, @"\|(.*)\n");
                     Match typeOfProcessing = Regex.Match(file, @"^(.+)\|");
