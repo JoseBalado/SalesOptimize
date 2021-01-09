@@ -24,7 +24,7 @@ namespace PaperRulez
                 IEnumerable<string> keywords = parameters;
 
                 var lookupStore = new LookupStore();
-                lookupStore.Record("client", "1234", keywords);
+                lookupStore.Record(client, documentId, keywords);
             }
 
             catch (Exception e)
