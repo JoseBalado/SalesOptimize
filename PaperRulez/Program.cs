@@ -9,30 +9,23 @@ namespace PaperRulez
     {
         static void Main(string[] args)
         {
-            IEnumerable<string> keywords = new List<string>();
             try
             {
-                // Open the text file using a stream reader.
-                using (var sr = new StreamReader("./client/1234_test.txt"))
-                {
-                    // Read the stream as a string, and write the string to the console.
-                    // string file = sr.ReadToEnd();
-                    string file = Utilities.LoadFile("client", "documentId");
+                string file = Utilities.LoadFile("client", "documentId");
 
-                    Match matchParameters = Regex.Match(file, @"\|(.*)\n");
-                    Match typeOfProcessing = Regex.Match(file, @"^(.+)\|");
-                    Console.WriteLine("-----------------------------");
-                    Console.WriteLine("File: \n" + file);
+                Match matchParameters = Regex.Match(file, @"\|(.*)\n");
+                Match typeOfProcessing = Regex.Match(file, @"^(.+)\|");
+                Console.WriteLine("-----------------------------");
+                Console.WriteLine("File: \n" + file);
 
-                    Console.WriteLine("-----------------------------");
-                    Console.WriteLine("Type of processing: " + typeOfProcessing.Groups[1].Value);
-                    Console.WriteLine("Match parameters: " + matchParameters.Groups[1].Value);
-                    Console.WriteLine("-----------------------------");
-                    string[] parameters = matchParameters.Groups[1].Value.Split(",");
+                Console.WriteLine("-----------------------------");
+                Console.WriteLine("Type of processing: " + typeOfProcessing.Groups[1].Value);
+                Console.WriteLine("Match parameters: " + matchParameters.Groups[1].Value);
+                Console.WriteLine("-----------------------------");
+                string[] parameters = matchParameters.Groups[1].Value.Split(",");
 
-                    Utilities.LookupInFile(file, parameters[0]);
-                    keywords = parameters;
-                }
+                Utilities.LookupInFile(file, parameters[0]);
+                IEnumerable<string> keywords = parameters;
 
                 var lookupStore = new LookupStore();
                 lookupStore.Record("client", "1234", keywords);
