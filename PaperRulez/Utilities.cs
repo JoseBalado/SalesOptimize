@@ -1,11 +1,20 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace PaperRulez
 {
     static class Utilities
     {
+        static public IEnumerable<string>  FindParameters(string file)
+        {
+            Match matchParameters = Regex.Match(file, @"\|(.*)\n");
+            Console.WriteLine("Match parameters: " + matchParameters.Groups[1].Value);
+            IEnumerable<string> parameters = matchParameters.Groups[1].Value.Split(",");
+            return parameters;
+        }
+
         static public string LoadFile(string client, string documentId)
         {
             try
