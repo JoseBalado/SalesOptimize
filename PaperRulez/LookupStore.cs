@@ -8,7 +8,11 @@ namespace PaperRulez
     {
         public void Record (string client, string documentId, IEnumerable<string> keywords)
         {
-            Console.WriteLine("Hello from lookupStore.Record()");
+            Console.WriteLine($"Saving record for client: {client}, documentId: {documentId}, with keywords:");
+            foreach (var keyword in keywords)
+            {
+                Console.WriteLine($"<{keyword}>");
+            }
         }
 
     }
